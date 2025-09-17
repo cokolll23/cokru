@@ -40,7 +40,18 @@ $eventManager = \Bitrix\Main\EventManager::getInstance();
     '\Bitrix\Catalog\Model\Product::OnAfterUpdate',
     ['EventsHandlers\QuantityChangeHandler', 'QuantityChangeHandler']
 );*/
+
 // Кастомный тип пользовательских полей
 //$eventManager->addEventHandler('main', 'OnUserTypeBuildList', ['UserTypes\CUserTypeCustomLink', 'GetUserTypeDescription']);
 //$eventManager->addEventHandler('main', 'OnUserTypeBuildList', ['UserTypes\CUserTypeUserId', 'GetUserTypeDescription']);
 $eventManager->addEventHandler('main', 'OnUserTypeBuildList', ['UserTypes\FormatTelegramLink', 'GetUserTypeDescription']);
+
+// пользовательский тип для свойства инфоблока
+$eventManager->AddEventHandler(
+    'iblock',
+    'OnIBlockPropertyBuildList',
+    [
+        'UserTypes\IBLink', // класс обработчик пользовательского типа свойства
+        'GetUserTypeDescription'
+    ]
+);
