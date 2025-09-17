@@ -13,7 +13,7 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 	{
 		?>
 		<span class="fields string_formatted field-item">
-			<a href="<?= $value ?>" target="_blank"><?= $value ?></a>
+			<a id="<?= $value ?>" href="#">История обращений</a>
 		</span>
 	<?php } ?>
 </span>
