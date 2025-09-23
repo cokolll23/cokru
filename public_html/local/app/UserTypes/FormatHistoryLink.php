@@ -8,7 +8,7 @@ class FormatHistoryLink extends StringFormattedType
 {
     public const
         USER_TYPE_ID = 'telegram_string_formatted_link',
-        RENDER_COMPONENT = 'lab:main.field.stringformatted'; // компонент который обрабатывает ссылку на телеграм
+        RENDER_COMPONENT = 'lab:main.field.stringformatted'; // компонент который обрабатывает ссылку
 
     // public const RENDER_COMPONENT = 'otus:main.field.stringformatted';
 
