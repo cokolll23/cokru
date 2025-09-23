@@ -19,11 +19,11 @@ if (file_exists(__DIR__ . '/includes/pretty_print.php')) {
 $eventManager = \Bitrix\Main\EventManager::getInstance();
 
 //CUtil::InitJSCore(array('jquery3', 'popup', 'ajax', 'date'));
-//\Bitrix\Main\UI\Extension::load('labjsext.getDealsClickEvent');
+\Bitrix\Main\UI\Extension::load('lab.absenceCalendarLeftMenuButton');
 //\Bitrix\Main\UI\Extension::load('labjsext.getDealsByVinInputEvent');
 
 // Добавить таб в карточку контакта
-//$eventManager->addEventHandler('crm', 'onEntityDetailsTabsInitialized',['EventsHandlers\onEntityDetailsTabsInitializedHandler','onEntityDetailsTabsInitializedHandler']);
+$eventManager->addEventHandler('crm', 'onEntityDetailsTabsInitialized',['EventsHandlers\onEntityDetailsTabsInitializedHandler','onEntityDetailsTabsInitializedHandler']);
 
 //$eventManager->addEventHandlerCompatible("crm", "OnBeforeCrmDealAdd", ['EventsHandlers\OnBeforeCrmDealAddHandler', 'OnBeforeCrmDealAddHandler']);
 
@@ -31,8 +31,9 @@ $eventManager = \Bitrix\Main\EventManager::getInstance();
 //$eventManager->addEventHandler('catalog', 'OnProductUpdate', ['EventsHandlers\OnProductQuantityChange', 'OnProductQuantityChangeHandler']);
 //$eventManager->addEventHandler("iblock", "OnAfterIBlockElementUpdate", ['EventsHandlers\OnAfterIBlockElementUpdateHandler', 'OnAfterIBlockElementUpdateHandler']);
 
-// Добавить проверку на дубликаты сделок по VIN и стадия выполнения
-//$eventManager->addEventHandler('crm', 'OnBeforeCrmDealAdd', ['EventsHandlers\OnBeforeCrmDealAddHandler','checkDuplicateDealByVin']);
+// Добавить проверку на дубликаты сделок не законченных по VIN и стадия выполнения WON
+// и запрещение добавления сделки
+$eventManager->addEventHandler('crm', 'OnBeforeCrmDealAdd', ['EventsHandlers\OnBeforeCrmDealAddHandler','checkDuplicateDealByVin']);
 
 // Альтернативный вариант через D7 events
 /*$eventManager->addEventHandler(
@@ -41,10 +42,11 @@ $eventManager = \Bitrix\Main\EventManager::getInstance();
     ['EventsHandlers\QuantityChangeHandler', 'QuantityChangeHandler']
 );*/
 
-// Кастомный тип пользовательских полей
+// Кастомный тип пользовательских полей UF
 //$eventManager->addEventHandler('main', 'OnUserTypeBuildList', ['UserTypes\CUserTypeCustomLink', 'GetUserTypeDescription']);
 //$eventManager->addEventHandler('main', 'OnUserTypeBuildList', ['UserTypes\CUserTypeUserId', 'GetUserTypeDescription']);
 $eventManager->addEventHandler('main', 'OnUserTypeBuildList', ['UserTypes\FormatTelegramLink', 'GetUserTypeDescription']);
+$eventManager->addEventHandler('main', 'OnUserTypeBuildList', ['UserTypes\FormatHistoryLink', 'GetUserTypeDescription']);
 
 // пользовательский тип для свойства инфоблока
 $eventManager->AddEventHandler(

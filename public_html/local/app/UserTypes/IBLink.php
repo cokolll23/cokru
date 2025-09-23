@@ -1,7 +1,7 @@
 <?php
 
 namespace UserTypes;
-
+// тип пользовательского свойства для ИБ
 class IBLink
 {
     public static function GetUserTypeDescription()
